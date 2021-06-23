@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<div class="container-md mt-3">
+    <div class="text-center">
+        <h1 class="text-white">Hola, Bienvenido <span style="color:red">{{user}}</span> </h1>
+    </div>
+     
+    {% if peliculas %}
+         {% for pelicula in peliculas %}
+               {% if forloop.first %} <div class="row mt-3"> {% endif%}
+                <div class="col-3" style="height:650px;">
+                    <div class="card">
+                        <img src="{% static pelicula.url_img  %}" alt="pelicula">
+                        <div class="card-body">
+                            <h2 class="card-title text-center">
+                                {{ pelicula.title }}
+                            </h2>
+                            <p class="card-text" style="text-align:justify;">
+                                {{ pelicula.description }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            {% if forloop.counter|divisibleby:4 %} </div> {% endif %}
+          
+         {% endfor %}   
+    {% endif %}
+</div>
+
+{% endblock content %}
+
